@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "mermer",
+    "title": "Mermer ve Doğaltaş",
+    "description": "Mutfak tezgahından banyo kaplamasına kadar tüm mermer uygulamalarında hassas ölçüm, kesim ve profesyonel montaj.",
+    "highlights": [
+      "CNC kesim ve parlak yüzey uygulamaları",
+      "Leke ve çizik korumalı emprenye çözümleri",
+      "48 saat içinde keşif ve teklif"
+    ]
+  },
+  {
+    "slug": "mobilya",
+    "title": "Özel Mobilya",
+    "description": "Mekanınıza özel tasarlanan vestiyer, TV üniteleri, mutfak dolapları ve depolama çözümleri.",
+    "highlights": [
+      "3D modelleme ile ön onay",
+      "Lake, ahşap ve kaplamada uzman ekip",
+      "Kurulum sonrası ayar ve bakım"
+    ]
+  },
+  {
+    "slug": "montaj",
+    "title": "Montaj ve Usta Hizmetleri",
+    "description": "Kapı, pencere, duşakabin, aksesuar ve zemin montajında hızlı ve temiz iş teslimi.",
+    "highlights": [
+      "Gün içinde randevu planlama",
+      "Temiz çalışma ve atık toplama",
+      "Uygun fiyatlı bakım paketleri"
+    ]
+  },
+  {
+    "slug": "marangoz",
+    "title": "Marangoz ve Onarım",
+    "description": "Kapı, dolap, parkelerinizde bakım, tamir ve yenileme çözümleriyle uzun ömürlü kullanım.",
+    "highlights": [
+      "Yerinde ölçü ve montaj",
+      "Ahşap restorasyon ve onarım",
+      "Periyodik bakım programı"
+    ]
+  }
+]
