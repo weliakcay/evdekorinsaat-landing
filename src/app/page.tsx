@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Play } from 'lucide-react';
 import categories from '@/content/categories.json';
 import { buttonStyles } from '@/components/ui/button-styles';
 import { Card } from '@/components/ui/card';
@@ -43,52 +42,45 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden rounded-b-[48px] bg-[#111827] text-white">
         <div
           className="absolute inset-0 -z-10 bg-cover bg-center opacity-60"
-          style={{ backgroundImage: `linear-gradient(rgba(17,23,39,0.85), rgba(17,23,39,0.85)), url(${heroImage})` }}
+          style={{ backgroundImage: `linear-gradient(rgba(17,23,39,0.88), rgba(17,23,39,0.88)), url(${heroImage})` }}
         />
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-16 lg:grid-cols-[1fr_0.8fr] lg:px-6 lg:pt-24">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-6 lg:pt-24">
           <div className="space-y-6">
-            <p className="text-sm uppercase tracking-[0.35em] text-[#d9aa63]">Hakkımızda</p>
-            <h1 className="text-balance text-4xl font-semibold leading-tight md:text-5xl">
-              İnovatif iç tasarım fikirleri ile yaşam alanlarınızı yeniden yorumluyoruz
+            <p className="text-sm uppercase tracking-[0.35em] text-[#d9aa63]">Hoş geldiniz</p>
+            <h1 className="text-balance text-4xl font-semibold leading-tight md:text-[44px]">
+              Antalya’nın Güvenilir Dekorasyon ve İnşaat Partneri
             </h1>
-            <p className="text-base text-white/75">
-              Antalya&apos;nın merkez ilçelerinde mermer uygulamalarından özel mobilyaya kadar uçtan uca proje yönetimi. Güvenilir ekip, şeffaf süreç ve estetik çözümler.
-            </p>
+            <div className="space-y-4 text-base text-white/80">
+              <p>Evdekor olarak Antalya’daki 100+ dekorasyon ve tadilat firmasının güçlü yönlerini ve internette paylaşılan yüzlerce müşteri isteğini & sorununu analiz ettik.</p>
+              <p>Ortak problemler hep aynıydı: dağınık hizmetler, zamanında bitmeyen işler, şeffaf olmayan fiyatlandırmalar.</p>
+              <p>Biz bu zinciri kırıyoruz. Anahtar teslim dekorasyon ve tadilat çözümleriyle tek noktadan güvenilir hizmet sunuyoruz. Projelerinizi planlandığı sürede ve öngörülen bütçeyle tamamlıyoruz.</p>
+            </div>
             <div className="flex flex-wrap items-center gap-4">
-              <Link className={buttonStyles(undefined, 'bg-[#d9aa63] text-[#111827] hover:bg-[#b18343]')} href="/rezervasyon">
-                Projenizi Başlatın
+              <Link className={buttonStyles(undefined, 'bg-[#d9aa63] text-[#111827] hover:bg-[#b18343]')} href="/iletisim">
+                📞 Hemen Teklif Al
               </Link>
-              <Link className="flex items-center gap-3 text-sm font-semibold text-white/80 transition hover:text-white" href="/iletisim">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30">
-                  <Play className="h-4 w-4" />
-                </span>
-                Tanıtım Videosu
+              <Link className={buttonStyles('outline', 'border-white text-white hover:bg-white/10')} href="/rezervasyon">
+                📅 Ücretsiz Keşif Randevusu
               </Link>
             </div>
           </div>
-          <div className="relative -mt-8 flex flex-col justify-end lg:mt-0">
-            <div className="card-shadow relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[32px] bg-white/95 p-8 text-[#111827]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#d9aa63]">Evdekor Sözleri</p>
-              <h2 className="mt-4 text-2xl font-semibold">25+ yıl deneyim, 1.250+ tamamlanan proje</h2>
-              <p className="mt-3 text-sm text-neutral-600">
-                Her projenin farklı hikâyesi var. Keşiften teslimata kadar planlı ilerleyen ekiplerimizle zamandan tasarruf sağlıyoruz.
-              </p>
-              <div className="mt-6 grid gap-6 text-sm font-semibold text-[#111827] sm:grid-cols-2">
-                <div>
-                  <p className="text-3xl font-bold text-[#d9aa63]">25+</p>
-                  <p>Yıllık Deneyim</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-[#d9aa63]">1.250+</p>
-                  <p>Tamamlanan Proje</p>
-                </div>
-              </div>
-              <Link className={buttonStyles('ghost', 'mt-6 w-full border border-[#111827]/15 bg-white text-sm font-semibold uppercase tracking-[0.2em] text-[#111827]')}
-                href="/hizmetler"
-              >
-                Tüm Hizmetler
-              </Link>
-            </div>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-2xl">
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src="https://www.youtube.com/embed/6Dh-RL__uN4?rel=0&modestbranding=1"
+              title="Evdekor Tanıtım Videosu"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+            <Image
+              src={aboutImage}
+              alt="Evdekor tanıtım görseli"
+              fill
+              className="absolute inset-0 -z-10 object-cover"
+              priority
+              sizes="(max-width: 1024px) 100vw, 540px"
+            />
           </div>
         </div>
       </section>
