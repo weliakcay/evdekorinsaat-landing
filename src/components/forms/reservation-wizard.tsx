@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import categories from '@/content/categories.json';
 import districts from '@/content/districts.json';
-import { buttonStyles } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button-styles';
 import { Select } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -49,9 +49,7 @@ const reservationSchema = z.object({
     .trim()
     .regex(/^[0-9+\s()-]{10,}$/i, 'Geçerli bir telefon numarası girin'),
   email: z.string().email('Geçerli bir e-posta girin'),
-  kvkk: z.literal(true, {
-    errorMap: () => ({ message: 'KVKK onayını işaretleyin' }),
-  }),
+  kvkk: z.boolean().refine((value) => value, 'KVKK onayını işaretleyin'),
 });
 
 export type ReservationFormValues = z.infer<typeof reservationSchema>;
@@ -188,7 +186,7 @@ export function ReservationWizard() {
   const goNext = async () => {
     const step = steps[currentStepIndex];
     if (step.fields.length) {
-      const fieldNames = step.fields as Array<keyof ReservationFormValues>;
+      const fieldNames = [...step.fields] as Array<keyof ReservationFormValues>;
       const valid = await trigger(fieldNames);
       if (!valid) return;
     }

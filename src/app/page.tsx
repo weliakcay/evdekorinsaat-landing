@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import categories from '@/content/categories.json';
 import insights from '@/content/insights.json';
-import { buttonStyles } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button-styles';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 

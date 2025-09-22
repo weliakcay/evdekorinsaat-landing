@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { buttonStyles } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button-styles';
 
 const contactSchema = z.object({
   fullName: z.string().min(2, 'Lütfen adınızı girin'),

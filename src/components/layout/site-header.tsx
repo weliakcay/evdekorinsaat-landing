@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
-import { buttonStyles } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button-styles';
 import { cn } from '@/lib/utils';
 import { Logo } from './logo';
 

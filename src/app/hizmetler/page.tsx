@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import categories from '@/content/categories.json';
 import { Card } from '@/components/ui/card';
-import { buttonStyles } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button-styles';
 
 export const metadata: Metadata = {
   title: 'Hizmetler',
