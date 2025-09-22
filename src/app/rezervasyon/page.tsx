@@ -27,7 +27,7 @@ export default function ReservationPage() {
         <ul className="grid gap-3 text-sm text-neutral-600 sm:grid-cols-3">
           {highlights.map((item) => (
             <li key={item} className="flex gap-2">
-              <span aria-hidden className="mt-1 h-1.5 w-1.5 rounded-full bg-[#ef6c39]" />
+              <span aria-hidden className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d9aa63]" />
               {item}
             </li>
           ))}

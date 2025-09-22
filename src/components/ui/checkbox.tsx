@@ -14,7 +14,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({ className,
       className="peer sr-only"
       {...props}
     />
-    <span className="flex h-5 w-5 items-center justify-center rounded-md border border-neutral-300 bg-white transition peer-checked:border-[#ef6c39] peer-checked:bg-[#ef6c39]">
+    <span className="flex h-5 w-5 items-center justify-center rounded-md border border-neutral-300 bg-white transition peer-checked:border-[#d9aa63] peer-checked:bg-[#d9aa63]">
       <Check className="h-3 w-3 text-white opacity-0 transition peer-checked:opacity-100" />
     </span>
     {props.children}

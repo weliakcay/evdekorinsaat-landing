@@ -264,14 +264,14 @@ export function ReservationWizard() {
               <span
                 className={cn(
                   'flex h-8 w-8 items-center justify-center rounded-full border text-xs font-semibold',
-                  isActive && 'border-[#ef6c39] bg-[#ef6c39] text-white',
-                  isCompleted && 'border-[#ef6c39]/40 bg-[#ef6c39]/10 text-[#ef6c39]',
+                  isActive && 'border-[#d9aa63] bg-[#d9aa63] text-white',
+                  isCompleted && 'border-[#d9aa63]/40 bg-[#d9aa63]/10 text-[#d9aa63]',
                   !isActive && !isCompleted && 'border-neutral-200 text-neutral-400',
                 )}
               >
                 {index + 1}
               </span>
-              <span className={cn('hidden text-xs uppercase tracking-[0.25em] text-neutral-400 sm:block', isActive && 'text-[#ef6c39]')}>
+              <span className={cn('hidden text-xs uppercase tracking-[0.25em] text-neutral-400 sm:block', isActive && 'text-[#d9aa63]')}>
                 {step.title}
               </span>
               {index !== steps.length - 1 ? <span className="hidden h-px w-10 bg-neutral-200 sm:block" /> : null}
@@ -358,7 +358,7 @@ export function ReservationWizard() {
                   const values = watch('expectations') ?? [];
                   const checked = values.includes(option.value);
                   return (
-                    <label key={option.value} className="flex cursor-pointer items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition hover:border-[#ef6c39]/60">
+                    <label key={option.value} className="flex cursor-pointer items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition hover:border-[#d9aa63]/60">
                       <input
                         type="checkbox"
                         value={option.value}
@@ -372,7 +372,7 @@ export function ReservationWizard() {
                           }
                           setValue('expectations', Array.from(next), { shouldDirty: true });
                         }}
-                        className="h-5 w-5 rounded border-neutral-300 text-[#ef6c39] focus:ring-[#ef6c39]"
+                        className="h-5 w-5 rounded border-neutral-300 text-[#d9aa63] focus:ring-[#d9aa63]"
                       />
                       <span className="text-sm text-neutral-600">{option.label}</span>
                     </label>
@@ -509,7 +509,7 @@ export function ReservationWizard() {
             )}
           </div>
           {submitState === 'success' ? (
-            <p className="text-sm font-medium text-[#ef6c39]">Teşekkürler! Talebiniz bize ulaştı.</p>
+            <p className="text-sm font-medium text-[#d9aa63]">Teşekkürler! Talebiniz bize ulaştı.</p>
           ) : null}
           {submitState === 'error' ? (
             <p className="text-sm text-red-500">Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.</p>

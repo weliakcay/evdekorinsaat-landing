@@ -42,7 +42,7 @@ export default function ContactPage() {
               <li key={title}>
                 <p className="font-semibold text-neutral-900">{title}</p>
                 {href ? (
-                  <Link href={href} className="transition hover:text-[#ef6c39]">
+                  <Link href={href} className="transition hover:text-[#d9aa63]">
                     {value}
                   </Link>
                 ) : (

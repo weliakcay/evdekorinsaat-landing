@@ -1,24 +1,17 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-export function Logo() {
+export function Logo({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
+  const accent = theme === 'dark' ? 'text-white' : 'text-[#111827]';
+  const highlight = theme === 'dark' ? 'text-[#d9aa63]' : 'text-[#b18343]';
+
   return (
     <Link
       href="/"
-      className="flex items-center gap-3 text-lg font-semibold tracking-tight text-neutral-900"
-      aria-label="Evdekorinsaat ana sayfa"
+      className="flex items-baseline gap-2 text-lg font-semibold tracking-[0.32em] uppercase"
+      aria-label="Evdekor İnşaat ana sayfa"
     >
-      <Image
-        src="/logo.svg"
-        alt="Evdekorinsaat"
-        width={48}
-        height={48}
-        priority
-      />
-      <span className="flex flex-col leading-none">
-        <span className="text-sm uppercase tracking-[0.22em] text-[#ef6c39]">Evdekor</span>
-        <span className="text-xl font-bold">İnşaat</span>
-      </span>
+      <span className={`${accent}`}>Evdekor</span>
+      <span className={`${highlight}`}>İnşaat</span>
     </Link>
   );
 }

@@ -67,7 +67,7 @@ export default function ServicesPage() {
                 <ul className="space-y-3 text-sm text-neutral-600">
                   {category.highlights.map((highlight) => (
                     <li key={highlight} className="flex gap-3">
-                      <span aria-hidden className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#ef6c39]" />
+                      <span aria-hidden className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#d9aa63]" />
                       {highlight}
                     </li>
                   ))}
@@ -80,7 +80,7 @@ export default function ServicesPage() {
                 <ol className="space-y-3 text-sm text-neutral-600">
                   {processes[category.slug]?.map((step, index) => (
                     <li key={step} className="flex gap-3">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-semibold text-[#ef6c39]">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-semibold text-[#d9aa63]">
                         {index + 1}
                       </span>
                       {step}

@@ -1,54 +1,107 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Phone, Mail } from 'lucide-react';
 import { Logo } from './logo';
 
-const nav = [
-  { label: 'Hizmetler', href: '/hizmetler' },
-  { label: 'Rezervasyon', href: '/rezervasyon' },
-  { label: 'İletişim', href: '/iletisim' },
+const footerNav = {
+  other: [
+    { label: 'Ana Sayfa', href: '/' },
+    { label: 'Hizmetler', href: '/hizmetler' },
+    { label: 'Rezervasyon', href: '/rezervasyon' },
+    { label: 'İletişim', href: '/iletisim' },
+  ],
+  quick: [
+    { label: 'KVKK & Gizlilik', href: '/iletisim' },
+    { label: 'Sözleşme', href: '/iletisim' },
+    { label: 'Sık Sorulan Sorular', href: '/hizmetler' },
+    { label: 'Referanslar', href: '/hizmetler' },
+  ],
+};
+
+const latestProjects = [
+  { label: 'Modern Salon Tasarımı' },
+  { label: 'Mutfak Detay Çalışması' },
+  { label: 'Ofis İç Mekan' },
+  { label: 'Mermer Banyo Çözümü' },
 ];
 
 const socials = [
   { label: 'Instagram', href: 'https://instagram.com', icon: Instagram },
   { label: 'Facebook', href: 'https://facebook.com', icon: Facebook },
-  { label: 'Ara', href: 'tel:+908505321525', icon: Phone },
+  { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-neutral-100 bg-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-6">
-        <div className="max-w-sm space-y-4">
-          <Logo />
-          <p className="text-sm text-neutral-500">
-            Antalya&apos;nın her ilçesinde mermer, marangozluk ve montaj projelerinizi uçtan uca yönetiyoruz. Güvenilir ekip, hızlı dönüş ve şeffaf fiyatlandırma.
-          </p>
-        </div>
-        <nav className="flex flex-col gap-2 text-sm text-neutral-500">
-          {nav.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-[#ef6c39]">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-neutral-400">Sosyal</p>
-          <div className="flex gap-3">
-            {socials.map(({ label, href, icon: Icon }) => (
-              <Link
-                key={label}
-                href={href}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-neutral-600 transition hover:border-[#ef6c39] hover:text-[#ef6c39]"
-                aria-label={label}
-              >
-                <Icon className="h-4 w-4" />
-              </Link>
-            ))}
+    <footer className="mt-24 border-t border-neutral-200">
+      <div className="bg-[#0f172a] text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-12 lg:px-6">
+          <div className="space-y-5 lg:col-span-4">
+            <Logo theme="dark" />
+            <p className="text-sm text-white/70">
+              Antalya merkez ilçelerinde mermer, marangozluk ve komple iç mekân tadilat projelerini anahtar teslim yönetiyoruz. Her detayda şeffaf süreç ve uzman ekip.
+            </p>
+            <div className="space-y-2 text-sm text-white/70">
+              <p className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-[#d9aa63]" /> +90 850 532 15 25
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-[#d9aa63]" /> destek@evdekorinsaat.com
+              </p>
+            </div>
+            <div className="flex gap-3 pt-2">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:border-[#d9aa63] hover:text-[#d9aa63]"
+                  aria-label={label}
+                >
+                  <Icon className="h-4 w-4" />
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="grid gap-10 text-sm text-white/70 lg:col-span-8 lg:grid-cols-3">
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">Diğer Sayfalar</h3>
+              <ul className="mt-4 space-y-2">
+                {footerNav.other.map((item) => (
+                  <li key={item.label}>
+                    <Link className="transition hover:text-[#d9aa63]" href={item.href}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">Hızlı Erişim</h3>
+              <ul className="mt-4 space-y-2">
+                {footerNav.quick.map((item) => (
+                  <li key={item.label}>
+                    <Link className="transition hover:text-[#d9aa63]" href={item.href}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">Güncel Projeler</h3>
+              <ul className="mt-4 space-y-2">
+                {latestProjects.map((item) => (
+                  <li key={item.label} className="flex items-start gap-2 text-white/70">
+                    <span aria-hidden className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d9aa63]" />
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div className="border-t border-neutral-100 bg-neutral-50 py-4">
-        <p className="mx-auto max-w-6xl px-4 text-xs text-neutral-400 lg:px-6">
+      <div className="bg-[#0b1220] py-5">
+        <p className="mx-auto max-w-6xl px-4 text-xs uppercase tracking-[0.3em] text-white/40 lg:px-6">
           © {new Date().getFullYear()} Evdekor İnşaat. Tüm hakları saklıdır.
         </p>
       </div>

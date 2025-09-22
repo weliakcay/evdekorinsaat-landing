@@ -82,7 +82,7 @@ export function ContactForm() {
         >
           {isSubmitting ? 'Gönderiliyor...' : 'Bilgilerimi Gönder'}
         </button>
-        {submitted ? <p className="text-sm text-[#ef6c39]">Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz.</p> : null}
+        {submitted ? <p className="text-sm text-[#d9aa63]">Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz.</p> : null}
       </div>
     </form>
   );

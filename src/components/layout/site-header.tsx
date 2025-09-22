@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { buttonStyles } from '@/components/ui/button-styles';
 import { cn } from '@/lib/utils';
 import { Logo } from './logo';
 
-const links = [
+const navLinks = [
   { href: '/', label: 'Ana Sayfa' },
   { href: '/hizmetler', label: 'Hizmetler' },
+  { href: '/rezervasyon', label: 'Projeye Başla' },
   { href: '/iletisim', label: 'İletişim' },
-  { href: '/rezervasyon', label: 'Rezervasyon' },
 ];
 
 export function SiteHeader() {
@@ -20,56 +20,38 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-6">
-        <Logo />
-        <nav className="hidden items-center gap-8 lg:flex">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'text-sm font-medium text-neutral-600 transition hover:text-[#ef6c39]',
-                  isActive && 'text-[#ef6c39]',
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="hidden gap-2 lg:flex">
-          <Link className={buttonStyles('outline')} href="/iletisim">
-            İletişime Geç
-          </Link>
-          <Link className={buttonStyles()} href="/rezervasyon">
-            Rezervasyon Yap
-          </Link>
+    <header className="relative z-50">
+      <div className="hidden w-full bg-[#0f172a] text-xs text-white lg:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-2" role="presentation">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5 text-[#d9aa63]" />
+              <span>Fener Mah. Lara Cad. No:18 Muratpaşa / Antalya</span>
+            </span>
+            <a href="tel:+908505321525" className="flex items-center gap-2 hover:text-[#d9aa63]">
+              <Phone className="h-3.5 w-3.5 text-[#d9aa63]" />
+              <span>+90 850 532 15 25</span>
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="h-3.5 w-3.5 text-[#d9aa63]" />
+            <span>Pzt - Cuma 08:00 - 19:00</span>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen((prev) => !prev)}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 lg:hidden"
-          aria-label="Menüyü aç"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
       </div>
-      {open ? (
-        <div className="border-t border-neutral-100 bg-white px-4 pb-6 pt-4 lg:hidden">
-          <nav className="flex flex-col gap-4">
-            {links.map((link) => {
+      <div className="bg-[#111827]/95 text-white shadow-lg backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-6">
+          <Logo theme="dark" />
+          <nav className="hidden items-center gap-8 text-sm uppercase tracking-[0.2em] lg:flex">
+            {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
                   className={cn(
-                    'text-sm font-medium text-neutral-600 transition hover:text-[#ef6c39]',
-                    isActive && 'text-[#ef6c39]'
+                    'transition-colors text-white/80 hover:text-white',
+                    isActive && 'text-[#d9aa63]'
                   )}
                 >
                   {link.label}
@@ -77,16 +59,47 @@ export function SiteHeader() {
               );
             })}
           </nav>
-          <div className="mt-4 grid gap-3">
-            <Link className={buttonStyles('outline')} href="/iletisim" onClick={() => setOpen(false)}>
-              İletişime Geç
-            </Link>
-            <Link className={buttonStyles()} href="/rezervasyon" onClick={() => setOpen(false)}>
-              Rezervasyon Yap
+          <div className="hidden lg:flex">
+            <Link className={buttonStyles('outline', 'border-white text-white hover:bg-white/10')} href="/rezervasyon">
+              Proje Talebi Oluştur
             </Link>
           </div>
+          <button
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white lg:hidden"
+            aria-label="Menüyü aç"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      ) : null}
+        {open ? (
+          <div className="border-t border-white/10 px-4 pb-6 pt-4 lg:hidden">
+            <nav className="grid gap-4 text-sm uppercase tracking-[0.2em] text-white/80">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={cn('transition hover:text-white', isActive && 'text-[#d9aa63]')}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <Link
+              className={buttonStyles('outline', 'mt-4 w-full border-white text-white hover:bg-white/10')}
+              href="/rezervasyon"
+              onClick={() => setOpen(false)}
+            >
+              Proje Talebi Oluştur
+            </Link>
+          </div>
+        ) : null}
+      </div>
     </header>
   );
 }
