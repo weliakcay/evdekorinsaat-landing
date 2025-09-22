@@ -6,8 +6,7 @@ import { Card } from '@/components/ui/card';
 
 const heroImage =
   'https://images.unsplash.com/photo-1505692763633-eb58e87e51b7?auto=format&fit=crop&w=2000&q=80';
-const aboutImage =
-  'https://images.unsplash.com/photo-1616627808264-8b6f1771d234?auto=format&fit=crop&w=1400&q=80';
+const aboutImage = '/interior-application.jpg';
 const testimonialImage =
   'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80';
 
