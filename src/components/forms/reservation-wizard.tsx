@@ -358,8 +358,8 @@ export function ReservationWizard() {
                         type="button"
                         onClick={() => toggle(option.value)}
                         className={cn(
-                          'flex h-full flex-col items-start gap-2 rounded-2xl border border-neutral-200 bg-white p-5 text-left transition hover:border-[#d9aa63]/60 hover:shadow-sm',
-                          isSelected && 'border-[#d9aa63] bg-[#fdf8f1] shadow-sm',
+                          'flex h-full flex-col items-start gap-2 rounded-2xl border border-neutral-200 bg-white p-5 text-left transition hover:border-[#d9aa63] hover:shadow-[0_12px_30px_-20px_rgba(217,170,99,0.8)]',
+                          isSelected && 'border-[#d9aa63] bg-[#fdf8f1] shadow-[0_12px_30px_-18px_rgba(217,170,99,0.6)]',
                         )}
                         aria-pressed={isSelected}
                       >

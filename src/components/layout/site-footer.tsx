@@ -25,7 +25,7 @@ const latestProjects = [
 ];
 
 const socials = [
-  { label: 'Instagram', href: 'https://instagram.com', icon: Instagram },
+  { label: 'Instagram', href: 'https://www.instagram.com/evdekorinsaat/', icon: Instagram },
   { label: 'Facebook', href: 'https://facebook.com', icon: Facebook },
   { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ];
@@ -42,7 +42,7 @@ export function SiteFooter() {
             </p>
             <div className="space-y-2 text-sm text-white/70">
               <p className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-[#d9aa63]" /> +90 850 532 15 25
+                <Phone className="h-4 w-4 text-[#d9aa63]" /> +90 532 485 72 57
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-[#d9aa63]" /> destek@evdekorinsaat.com

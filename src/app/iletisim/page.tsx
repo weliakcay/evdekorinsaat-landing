@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const contactDetails = [
   {
     title: 'Telefon',
-    value: '+90 850 532 15 25',
-    href: 'tel:+908505321525',
+    value: '+90 532 485 72 57',
+    href: 'tel:+905324857257',
   },
   {
     title: 'E-posta',

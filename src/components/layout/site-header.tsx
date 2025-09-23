@@ -28,9 +28,9 @@ export function SiteHeader() {
               <MapPin className="h-3.5 w-3.5 text-[#d9aa63]" />
               <span>Fener Mah. Lara Cad. No:18 Muratpaşa / Antalya</span>
             </span>
-            <a href="tel:+908505321525" className="flex items-center gap-2 hover:text-[#d9aa63]">
+            <a href="tel:+905324857257" className="flex items-center gap-2 hover:text-[#d9aa63]">
               <Phone className="h-3.5 w-3.5 text-[#d9aa63]" />
-              <span>+90 850 532 15 25</span>
+              <span>+90 532 485 72 57</span>
             </a>
           </div>
           <div className="flex items-center gap-2">
