@@ -50,36 +50,30 @@ export default function HomePage() {
               Antalya’nın Güvenilir Dekorasyon ve İnşaat Partneri
             </h1>
             <div className="space-y-4 text-base text-white/80">
-              <p>Evdekor olarak Antalya’daki 100+ dekorasyon ve tadilat firmasının güçlü yönlerini ve internette paylaşılan yüzlerce müşteri isteğini & sorununu analiz ettik.</p>
-              <p>Ortak problemler hep aynıydı: dağınık hizmetler, zamanında bitmeyen işler, şeffaf olmayan fiyatlandırmalar.</p>
-              <p>Biz bu zinciri kırıyoruz. Anahtar teslim dekorasyon ve tadilat çözümleriyle tek noktadan güvenilir hizmet sunuyoruz. Projelerinizi planlandığı sürede ve öngörülen bütçeyle tamamlıyoruz.</p>
+              <p>Evdekor olarak Antalya’daki 10000+ dekorasyon ve tadilat ile ilgili internette paylaşılan yüzlerce müşteri isteğini & sorununu analiz ettik.</p>
+              <p>Ortak problemler aynı: dağınık hizmetler, zamanında bitmeyen işler, şeffaf olmayan fiyatlandırmalar.</p>
+              <p>Biz bu zinciri kırıyoruz. Anahtar teslim dekorasyon ve tadilat çözümleriyle en güvenilir hizmeti sunuyoruz. Projelerinizi planlandığı sürede ve öngörülen bütçeyle tamamlıyoruz.</p>
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <Link className={buttonStyles(undefined, 'bg-[#d9aa63] text-[#111827] hover:bg-[#b18343]')} href="/iletisim">
                 📞 Hemen Teklif Al
               </Link>
               <Link className={buttonStyles('outline', 'border-white text-white hover:bg-white/10')} href="/rezervasyon">
-                📅 Ücretsiz Keşif Randevusu
+                📅 Ücretsiz Keşif
               </Link>
             </div>
           </div>
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-2xl">
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src="https://www.youtube.com/embed/6Dh-RL__uN4?rel=0&modestbranding=1"
-              title="Evdekor Tanıtım Videosu"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-            />
-            <Image
-              src={aboutImage}
-              alt="Evdekor tanıtım görseli"
-              fill
-              className="absolute inset-0 -z-10 object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 540px"
-            />
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              controls
+              playsInline
+              preload="metadata"
+              poster={aboutImage}
+            >
+              <source src="/hero-video.mp4" type="video/mp4" />
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
           </div>
         </div>
       </section>
@@ -157,7 +151,7 @@ export default function HomePage() {
             <p className="text-sm text-neutral-500">
               “Evdekor ile çalıştığımız projelerde süreç şeffaf ve profesyonel ilerliyor. Zamanında teslim edilen işler ve detaylı raporlarla güven veriyorlar.”
             </p>
-            <p className="mt-4 text-sm font-semibold text-[#111827]">Mark M. — Proje Sahibi</p>
+            <p className="mt-4 text-sm font-semibold text-[#111827]">Mustafa M. — Proje Sahibi</p>
           </div>
           <div className="flex gap-4">
             <Link className={buttonStyles(undefined, 'bg-[#d9aa63] text-[#111827] hover:bg-[#b18343]')} href="/rezervasyon">
