@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import districts from '@/content/districts.json';
@@ -63,7 +63,9 @@ const scheduleOptions = [
 
 const reservationSchema = z
   .object({
-    service: z.enum(serviceValues, { errorMap: () => ({ message: 'Lütfen hizmet seçin' }) }),
+    service: z
+      .array(z.enum(serviceValues))
+      .min(1, 'Lütfen en az bir hizmet seçin'),
     district: z.string().min(1, 'Lütfen bölge seçin'),
     districtOther: z.string().optional(),
     areaSize: z.string().optional(),
@@ -89,7 +91,8 @@ const reservationSchema = z
       });
     }
 
-    if (data.service !== 'ozel-mobilya') {
+    const requiresMeasurements = !(data.service.length === 1 && data.service[0] === 'ozel-mobilya');
+    if (requiresMeasurements) {
       if (!data.areaSize?.trim()) {
         ctx.addIssue({
           path: ['areaSize'],
@@ -155,7 +158,7 @@ type PersistedReservationData = Omit<ReservationFormValues, 'media'>;
 
 function getInitialData(): PersistedReservationData {
   const base: PersistedReservationData = {
-    service: 'anahtar-teslim',
+    service: ['anahtar-teslim'],
     district: '',
     districtOther: '',
     areaSize: '',
@@ -179,7 +182,9 @@ function getInitialData(): PersistedReservationData {
   }
 
   try {
-    return { ...base, ...JSON.parse(stored) };
+    const parsed = JSON.parse(stored) as Partial<PersistedReservationData>;
+    const service = Array.isArray(parsed.service) && parsed.service.length ? parsed.service : base.service;
+    return { ...base, ...parsed, service };
   } catch (error) {
     console.warn('Rezervasyon verisi okunamadı', error);
     return base;
@@ -196,6 +201,7 @@ export function ReservationWizard() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
+    control,
     register,
     handleSubmit,
     setValue,
@@ -208,10 +214,10 @@ export function ReservationWizard() {
     defaultValues,
   });
 
-  const selectedService = watch('service');
+  const selectedServices = watch('service') ?? [];
   const selectedDistrict = watch('district');
 
-  const skipSpaceStep = selectedService === 'ozel-mobilya';
+  const skipSpaceStep = selectedServices.length === 1 && selectedServices[0] === 'ozel-mobilya';
 
   useEffect(() => {
     const subscription = watch((value) => {
@@ -223,11 +229,11 @@ export function ReservationWizard() {
   }, [watch]);
 
   useEffect(() => {
-    if (selectedService === 'ozel-mobilya') {
+    if (skipSpaceStep) {
       setValue('areaSize', '', { shouldDirty: true });
       setValue('roomCount', '', { shouldDirty: true });
     }
-  }, [selectedService, setValue]);
+  }, [skipSpaceStep, setValue]);
 
   useEffect(() => () => {
     previews.forEach((url) => URL.revokeObjectURL(url));
@@ -292,7 +298,10 @@ export function ReservationWizard() {
   });
 
   const currentStep = steps[currentStepIndex];
-  const serviceLabel = serviceOptions.find((option) => option.value === selectedService)?.title;
+  const serviceLabel = selectedServices
+    .map((value) => serviceOptions.find((option) => option.value === value)?.title)
+    .filter(Boolean)
+    .join(', ');
 
   return (
     <Card className="border-none bg-white p-6 shadow-[0_30px_100px_-60px_rgba(15,23,42,0.55)]">
@@ -323,32 +332,48 @@ export function ReservationWizard() {
 
       <form className="mt-8 space-y-8" onSubmit={onSubmit}>
         {currentStep.id === 'service' && (
-          <div className="grid gap-4 md:grid-cols-2">
-            <input type="hidden" {...register('service')} />
-            {serviceOptions.map((option) => {
-              const isSelected = selectedService === option.value;
+          <Controller
+            control={control}
+            name="service"
+            render={({ field }) => {
+              const value = (field.value || []) as ServiceValue[];
+              const toggle = (serviceValue: ServiceValue) => {
+                const set = new Set(value);
+                if (set.has(serviceValue)) {
+                  set.delete(serviceValue);
+                } else {
+                  set.add(serviceValue);
+                }
+                const next = Array.from(set);
+                field.onChange(next);
+                void trigger('service');
+              };
               return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    setValue('service', option.value, { shouldDirty: true, shouldValidate: true });
-                    void trigger('service');
-                  }}
-                  className={cn(
-                    'flex h-full flex-col items-start gap-2 rounded-2xl border border-neutral-200 bg-white p-5 text-left transition hover:border-[#d9aa63]/60 hover:shadow-sm',
-                    isSelected && 'border-[#d9aa63] bg-[#fdf8f1] shadow-sm',
-                  )}
-                  aria-pressed={isSelected}
-                >
-                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Hizmet</span>
-                  <span className="text-lg font-semibold text-[#111827]">{option.title}</span>
-                  <span className="text-sm text-neutral-500">{option.description}</span>
-                </button>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {serviceOptions.map((option) => {
+                    const isSelected = value.includes(option.value);
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => toggle(option.value)}
+                        className={cn(
+                          'flex h-full flex-col items-start gap-2 rounded-2xl border border-neutral-200 bg-white p-5 text-left transition hover:border-[#d9aa63]/60 hover:shadow-sm',
+                          isSelected && 'border-[#d9aa63] bg-[#fdf8f1] shadow-sm',
+                        )}
+                        aria-pressed={isSelected}
+                      >
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Hizmet</span>
+                        <span className="text-lg font-semibold text-[#111827]">{option.title}</span>
+                        <span className="text-sm text-neutral-500">{option.description}</span>
+                      </button>
+                    );
+                  })}
+                  {errors.service ? <p className="col-span-full text-sm text-red-500">{errors.service.message}</p> : null}
+                </div>
               );
-            })}
-            {errors.service ? <p className="col-span-full text-sm text-red-500">{errors.service.message}</p> : null}
-          </div>
+            }}
+          />
         )}
 
         {currentStep.id === 'district' && (
