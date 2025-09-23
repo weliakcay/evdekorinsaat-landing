@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -193,6 +193,7 @@ export function ReservationWizard() {
   const [previews, setPreviews] = useState<string[]>([]);
 
   const defaultValues = useMemo(() => getInitialData(), []);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
     register,
@@ -323,6 +324,7 @@ export function ReservationWizard() {
       <form className="mt-8 space-y-8" onSubmit={onSubmit}>
         {currentStep.id === 'service' && (
           <div className="grid gap-4 md:grid-cols-2">
+            <input type="hidden" {...register('service')} />
             {serviceOptions.map((option) => {
               const isSelected = selectedService === option.value;
               return (
@@ -331,11 +333,13 @@ export function ReservationWizard() {
                   type="button"
                   onClick={() => {
                     setValue('service', option.value, { shouldDirty: true, shouldValidate: true });
+                    void trigger('service');
                   }}
                   className={cn(
                     'flex h-full flex-col items-start gap-2 rounded-2xl border border-neutral-200 bg-white p-5 text-left transition hover:border-[#d9aa63]/60 hover:shadow-sm',
                     isSelected && 'border-[#d9aa63] bg-[#fdf8f1] shadow-sm',
                   )}
+                  aria-pressed={isSelected}
                 >
                   <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Hizmet</span>
                   <span className="text-lg font-semibold text-[#111827]">{option.title}</span>
@@ -343,7 +347,7 @@ export function ReservationWizard() {
                 </button>
               );
             })}
-            {errors.service ? <p className="text-sm text-red-500">{errors.service.message}</p> : null}
+            {errors.service ? <p className="col-span-full text-sm text-red-500">{errors.service.message}</p> : null}
           </div>
         )}
 
@@ -418,24 +422,33 @@ export function ReservationWizard() {
 
         {currentStep.id === 'media' && (
           <div className="grid gap-4">
-            <label htmlFor="media" className="text-sm font-medium text-neutral-700">
-              Projeye ait görseller (opsiyonel)
-            </label>
-            <Input
+            <span className="text-sm font-medium text-neutral-700">Projeye ait görseller (opsiyonel)</span>
+            <input
+              ref={fileInputRef}
               id="media"
               type="file"
               multiple
               accept="image/*"
+              className="hidden"
               onChange={(event) => {
                 const { files } = event.target;
                 if (!files) return;
+                const fileArray = Array.from(files);
                 setValue('media', files, { shouldDirty: true });
                 setPreviews((prev) => {
                   prev.forEach((url) => URL.revokeObjectURL(url));
-                  return Array.from(files).map((file) => URL.createObjectURL(file));
+                  return fileArray.map((file) => URL.createObjectURL(file));
                 });
+                event.target.value = '';
               }}
             />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className={buttonStyles('outline', 'justify-center')}
+            >
+              Görsel Seç
+            </button>
             <p className="text-xs text-neutral-500">Görseller sadece ön inceleme içindir ve kaydedilmez.</p>
             {previews.length ? (
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
